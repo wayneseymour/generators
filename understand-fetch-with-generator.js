@@ -12,9 +12,10 @@ function* createQuoteFetcher(endpoint) {
   return `${quote.content} -${quote.author}`
 }
 
-function* f() {
-  yield fetch(url)
+function* f(endpoint) {
+  yield fetch(endpoint)
 }
-const iteratorResult = f().next()
+// Initialize state.
+const iteratorResult = f(url).next()
 const thenable = iteratorResult.value;
-// thenable.then((x) => x.pipe(process.stdout))
+thenable.then((x) => x.body.pipe(process.stdout));
