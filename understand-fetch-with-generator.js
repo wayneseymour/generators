@@ -17,4 +17,4 @@ function* f() {
 }
 const iteratorResult = f().next()
 const thenable = iteratorResult.value;
-// thenable.then((x) => x.pipe(process.stdout))
+thenable.then((x) => x.body.pipe(process.stdout));
