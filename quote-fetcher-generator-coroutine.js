@@ -13,14 +13,14 @@ function createQuoteFetcher(endpoint) {
   }
 }
 
-const coroutineP = (gen) => {
+const coroutine = (gen) => {
   // Instantiate the generator.
   const generator = gen();
 
   // Recursively handle resuming the generator
   const handle = (result) => {
-    // Exit case: If done is truthy, dont keep trying to resume the generator.
-    // Instead, resolve the value (iterator result) of .next();
+    // Exit case: if done is truthy, dont keep trying to resume the generator.
+    // Instead,
     if (result.done) {
       return Promise.resolve(result.value)
     }
@@ -34,7 +34,7 @@ const coroutineP = (gen) => {
   return handle(generator.next());
 }
 
-coroutineP(createQuoteFetcher(url))
+const fetcher = coroutine(createQuoteFetcher(url))
   .then(quote => console.log(quote))
 
 
