@@ -2,6 +2,7 @@
 From: https://egghead.io/lessons/javascript-use-javascript-es6-generators-with-promises-to-handle-async-flows
 */
 import fetch from 'node-fetch'
+import co from 'co'
 
 const url = 'https://api.quotable.io/random'
 
@@ -33,8 +34,9 @@ const resumeGenerator = (gen) => {
   return handle(generator.next());
 }
 
-const quote = await resumeGenerator(createQuoteFetcher(url))
-console.log(`\n### quote: \n\t${quote}`)
+await resumeGenerator(createQuoteFetcher(url))
+await co(createQuoteFetcher(url))
+
 
 
 
