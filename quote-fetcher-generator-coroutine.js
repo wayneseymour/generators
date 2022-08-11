@@ -20,7 +20,6 @@ const coroutine = (gen) => {
   // Recursively handle resuming the generator
   const handle = (result) => {
     // Exit case: if done is truthy, dont keep trying to resume the generator.
-    // Instead,
     if (result.done) {
       return Promise.resolve(result.value)
     }
