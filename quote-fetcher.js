@@ -5,13 +5,7 @@ import fetch from 'node-fetch'
 
 const url = 'https://api.quotable.io/random'
 
-function* createQuoteFetcher() {
-  const response = yield fetch(url)
-  const quote = yield response.json()
-  return `${quote.content} -${quote.author}`
-}
-
-const fetcher = createQuoteFetcher();
+const fetcher = createQuoteFetcher(url);
 // the value is a thenable, a promise
 fetcher.next().value
   // at the fetcher.next(x) call, we are passing the promise response
@@ -24,3 +18,10 @@ fetcher.next().value
   .then((x) => {
     return fetcher.next(x).value
   })
+
+
+  function* createQuoteFetcher(endpoint) {
+    const response = yield fetch(endpoint)
+    const quote = yield response.json()
+    return `${quote.content} -${quote.author}`
+  }
