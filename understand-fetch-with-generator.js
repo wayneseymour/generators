@@ -17,5 +17,7 @@ function* f(endpoint) {
 }
 // Initialize state.
 const iteratorResult = f(url).next()
+// Grab the promise.
 const thenable = iteratorResult.value;
+// Pipe the body to stdout
 thenable.then((x) => x.body.pipe(process.stdout));
